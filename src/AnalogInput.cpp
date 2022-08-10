@@ -27,6 +27,7 @@
 
 int sensorValue = 0;        // value read from the pot
 int outputValue = 0;        // value output to the PWM (analog out)
+int prueba_para_el_git = 0; //Borrar despues
 
 int p_nivel = 0, p_desviacion = 0;
 int array_niveles[N_NIVELES], nivel = 0;
@@ -44,7 +45,7 @@ void AnalogInput_setup (void) {
 void AnalogInput_loop (unsigned long t_actual) {
   //float tension = 0;
   //float fondoEscala = 3.3;
-  float aux = 0;
+  //float aux = 0;
 
   if ((t_actual - timeout_lectura) > TIMEOUT_LECTURA_NIVEL) {
     timeout_lectura = t_actual;                         //Se resetea el TIMEOUT.
