@@ -1,0 +1,45 @@
+//SN SENDER
+53 = S
+4D = M
+46 = F
+43 = C
+36 = 6
+36 = 6
+46 = F
+38 = 8
+38 = 8
+39 = 9
+//SN RECEPTIONER
+30 = 0
+30 = 0
+30 = 0
+30 = 0
+30 = 0
+30 = 0
+30 = 0
+30 = 0
+30 = 0
+30 = 0
+//LONGITUD (4 bytes):
+C = 12
+0 = 0
+0 = 0
+0 = 0
+//MENSAJE:
+41 = A
+6E = n
+67 = g
+65 = e
+6C = l
+20 = ' '
+52 = R
+6F = o
+70 = p
+65 = e
+72 = r
+6F = o
+//CRC (4 Bytes):
+E5 = CRC LSB
+10 = CRC MSB
+//Byte de cierre NULL
+0  = 0

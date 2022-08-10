@@ -1,0 +1,14 @@
+{
+    "folders": [
+		{
+			"name": "SMF_RELES",
+			"path": "."
+		}
+	],
+    "settings": {
+        "git.ignoreLimitWarning": true,
+        "files.associations": {
+            "array": "cpp"
+        }
+    }
+}

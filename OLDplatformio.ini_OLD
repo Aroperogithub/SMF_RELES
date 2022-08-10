@@ -1,0 +1,106 @@
+; PlatformIO Project Configuration File
+;
+;   Build options: build flags, source filter
+;   Upload options: custom upload port, speed and extra flags
+;   Library options: dependencies, extra library storages
+;   Advanced options: extra scripting
+;
+; Please visit documentation for the other options and examples
+; https://docs.platformio.org/page/projectconf.html
+
+[env:esp32dev]
+; platform = espressif32
+board = esp32dev
+framework = arduino
+
+[platformio]
+default_envs = debug
+
+
+
+[wifi]
+ssid_dev = MIWIFI_2G_JgMw
+password_dev = QJgMwbIJ
+
+[info_fw]
+fin_vigencia_fw = 31/12/2500
+
+[common]
+platform = https://github.com/platformio/platform-espressif32.git
+monitor_speed = 115200
+upload_speed = 921600
+
+; firmware version, please modify it between releases
+; positive integer value
+; ## cualquier cambio de version, suponen una posibe OTA nueva.
+release_version = 1
+; ## cualquier cambio de sub_version, suponen una posibe OTA nueva.
+release_sub_version = 0
+ver_desarrollo = SI
+; ### variable que pasamos al programa, para saber si estamos en desarrollo o no. 
+
+
+; ##Para por ejemplo, pasar datos de wifi de prueba locales a cada desarrollador.
+; DHT11 = SI ## para compilar el SW con el sensor DHT11
+
+
+; build configuration based on Bintray and Wi-Fi settings
+build_flags =
+    '-DWIFI_SSID_DEV="${wifi.ssid_dev}"'
+    '-DWIFI_PASS_DEV="${wifi.password_dev}"'
+    ;'-DBINTRAY_USER="${bintray.user}"'
+    ;'-DBINTRAY_REPO="${bintray.repository}"'
+    ;'-DBINTRAY_PACKAGE="${bintray.package}"'
+    ;'-DBINTRAY_ORGANIZATION="${bintray.organization}"'
+    '-DVER_DESARROLLO="${common.ver_desarrollo}"' 
+    ;'-DSENSOR_DHT11'
+    '-DSENSOR_DHT22'
+    ;'-DDISPLAY_NEW'
+    ; -DDISPLAY_JV
+    -DBOARD_HAS_PSRAM
+    -mfix-esp32-psram-cache-issue
+    ;-DISPLAY_LAST
+    ;'-DUSERNAME="${thingerio_JV.USERNAME}"'
+    ;'-DDEVICE_ID="${thingerio_JV.DEVICE_ID}"'
+    ;'-DFIN_VIGENCIA_FW="${info_fw.fin_vigencia_fw}"'
+    ;'-DUSERNAME="${thingerio_AR.USERNAME}"'
+    ;'-DDEVICE_ID="${thingerio_AR.DEVICE_ID}"'
+    '-DFIN_VIGENCIA_FW="${info_fw.fin_vigencia_fw}"'
+    ; -DDEVICE_CREDENTIAL=SkZHZ%'%'EAplYGkw   ;-->> ojo no funciona con "%""
+
+[env:debug]
+platform = ${common.platform}
+monitor_speed = ${common.monitor_speed}
+upload_speed = ${common.upload_speed}
+framework = arduino
+
+board = esp32dev
+board_build.partitions = min_spiffs.csv
+
+build_flags =
+    ${common.build_flags}
+    ; -DRELEASE_VERSION=0
+    ; -DVERSION=0
+    ; lib_deps = ${common.lib_deps}
+
+[env:release]
+platform = ${common.platform}
+monitor_speed = ${common.monitor_speed}
+upload_speed = ${common.upload_speed}
+framework = arduino
+
+board = esp32dev
+board_build.partitions = min_spiffs.csv
+
+build_flags =
+    ${common.build_flags}
+    ; -DRELEASE_VERSION=${common.release_version}
+    ; -DRELEASE_SUB_VERSION=${common.release_sub_version}
+    ; -DVERSION=${common.release_version}
+lib_deps = ${common.lib_deps}
+; upload_protocol = custom
+extra_scripts = 
+    ;pre:buildscript_versioning.py
+    ;pre:pass_thinger_credencials.py
+    ;post:publish_firmware.py
+
